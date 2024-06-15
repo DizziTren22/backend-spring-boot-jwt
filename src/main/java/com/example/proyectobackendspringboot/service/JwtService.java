@@ -30,14 +30,14 @@ public class JwtService {
         Date dateCurrent = new Date();
         Calendar dateCalendar = Calendar.getInstance();
         dateCalendar.setTime(dateCurrent);
-        dateCalendar.add(Calendar.SECOND, 30);
-        Date dateWith30Seconds = dateCalendar.getTime();
+        dateCalendar.add(Calendar.HOUR, 1);
+        Date dateWith1Hours = dateCalendar.getTime();
 
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
                 .setIssuedAt(dateCurrent)
-                .setExpiration(dateWith30Seconds)
+                .setExpiration(dateWith1Hours)
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
