@@ -27,17 +27,17 @@ public class JwtService {
     }
 
     private String generateToken(HashMap<String, Object> extraClaims, UserDetails user) {
-        Date fechaActual = new Date();
-        Calendar calendario = Calendar.getInstance();
-        calendario.setTime(fechaActual);
-        calendario.add(Calendar.SECOND, 30);
-        Date fechaCon30Segundos = calendario.getTime();
+        Date dateCurrent = new Date();
+        Calendar dateCalendar = Calendar.getInstance();
+        dateCalendar.setTime(dateCurrent);
+        dateCalendar.add(Calendar.SECOND, 30);
+        Date dateWith30Seconds = dateCalendar.getTime();
 
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
-                .setIssuedAt(fechaActual)
-                .setExpiration(fechaCon30Segundos)
+                .setIssuedAt(dateCurrent)
+                .setExpiration(dateWith30Seconds)
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
